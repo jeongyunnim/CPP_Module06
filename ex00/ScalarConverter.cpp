@@ -23,38 +23,32 @@ ScalarConverter::ScalarConverter(const ScalarConverter& other)
 	*this = other;
 }
 
-bool	ScalarConverter::parseTargetString(std::string& target)
-{
-	std::stringstream targetStream;
+// bool	ScalarConverter::stringToOtherType(std::string& target)
+// {
+// 	std::stringstream targetStream;
 
-	if (target.size() == 1)
-	{
-		if (std::isprint(target[0]) == true)
-			_charType = target[0];
-		else
-			_charType = NON_PRINTABLE;
-	}
-	targetStream.str(target);
-	targetStream >> _doubleType;
-	if (targetStream.fail() || targetStream.eof() == false)
-	{
-		return (false);
-	}
-	if (target[0] == '+' || target[0] == '-' || isalnum(target[0]) == true)
-	{
-		// {num}, +{num}, -{num}, +inf, +inff, -inf, -inff, nan
+// 	targetStream.str(target);
+// 	targetStream >> _doubleType;
 
-	}
-	else
-	{
-		// {single character}
-		if (target.size() != 1)
-		{
-			return (false);
-		}
-		return (true);
-	}
-}
+// 	if (targetStream.fail() || targetStream.eof() == false)
+// 	{
+// 		return (false);
+// 	}
+
+// 	if (target[0] == '+' || target[0] == '-' || isalnum(target[0]) == true)
+// 	{
+// 		// {num}, +{num}, -{num}, +inf, +inff, -inf, -inff, nan, nanf
+// 	}
+// 	else
+// 	{
+// 		// {single character}
+// 		if (target.size() != 1)
+// 		{
+// 			return (false);
+// 		}
+// 		return (true);
+// 	}
+// }
 
 void ScalarConverter::convert(std::string target)
 {
@@ -63,7 +57,15 @@ void ScalarConverter::convert(std::string target)
 		std::cerr << RED << "Error: String is empty" << RESET << std::endl;
 		return ;
 	}
-	if (parseTargetString(target) == false)
+	else if (target.size() == 1)
+	{
+		if (std::isprint(target[0]) == true)
+			_charType = target[0];
+		else
+			_charType = NON_PRINTABLE;
+		
+	}
+	if (stringToOtherType(target) == false)
 	{
 		std::cerr << "Input: " << target << RED << " Error: Invalid string error" << RESET << std::endl;
 		return ;

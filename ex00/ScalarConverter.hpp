@@ -31,28 +31,21 @@
 #define BACKGROUND_CYAN        "\033[46m"   // 배경색: 청록색
 #define BACKGROUND_WHITE       "\033[47m"   // 배경색: 흰색
 
-enum e_scalarType
-{
-	IMPOSSIBLE = 1,
-	NONPRINTABLE,
-	INVALID_STRING,
-};
-
 class ScalarConverter
 {
 public:
-	ScalarConverter(void);
 	~ScalarConverter(void);
 	ScalarConverter& operator=(const ScalarConverter& rhs);
 	ScalarConverter(const ScalarConverter& other);
 
-	void convert(std::string target);
+	static void convert(std::string target);
 
 private:
 
-	double _doubleType;
-	float _floatType;
-	int	_intType;
-	char _charType;
-	bool parseTargetString(std::string& target);
+	ScalarConverter(void);
+
+	static double		_doubleType;
+	static std::string	convertedType;
+	void stringToOtherType(std::string& target);
+	void charToOtherType(std::string& target);
 };

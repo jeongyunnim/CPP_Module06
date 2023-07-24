@@ -16,11 +16,12 @@ int main(int argc, char *argv[])
 	stringStreamForTest.str(argv[1]);
 	std::cout << "original string: " << stringStreamForTest.str() << std::endl;
 
+	stringStreamForTest.clear();
 	stringStreamForTest.str(argv[1]);
 	stringStreamForTest >> testInt;
 	std::cout << "int: " << testInt << std::endl;
 
-	// stringStreamForTest.clear();
+	stringStreamForTest.clear();
 	stringStreamForTest.str(argv[1]);
 	std::cout << "original string: " << stringStreamForTest.str() << std::endl;
 	stringStreamForTest >> testFloat;
@@ -34,7 +35,7 @@ int main(int argc, char *argv[])
         std::cout << "Failed to convert the string to float." << std::endl;
     }
     else {
-        std::cout << "Float value: " << testFloat << std::endl;
+        std::cout << std::fixed << "Float value: " << testFloat << std::endl;
     }
 	return (0);
 }
