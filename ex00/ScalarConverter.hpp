@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <iomanip>
 #include <sstream>
 
 #define RESET       "\033[0m"     // 모든 색상과 스타일 초기화
