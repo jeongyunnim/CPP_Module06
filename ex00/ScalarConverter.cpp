@@ -1,74 +1,40 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter(void)
-	:	_doubleType(0)
-	,	_floatType(0)
-	,	_intType(0)
-	,	_charType(0)
-{}
-
-ScalarConverter::~ScalarConverter(void) {}
-
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs)
+static std::string convertToInt(double target)
 {
-	_doubleType = rhs._doubleType;
-	_floatType = rhs._floatType;
-	_intType = rhs._intType;
-	_charType = rhs._charType;
-	return (*this);
+	std::string result;
+
+	if (target > INT32_MAX || target > INT32_MAX)
+	return (result);
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other)
+void ScalarConverter::stringToOtherType(std::string& target)
 {
-	*this = other;
+
 }
 
-// bool	ScalarConverter::stringToOtherType(std::string& target)
-// {
-// 	std::stringstream targetStream;
+void ScalarConverter::charToOtherType(char target)
+{
+	if (std::isprint(target) == true)
+		std::cout << "char: " << target << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	std::cout << "int: " << static_cast<int>(target) << std::endl;
+	std::cout << "float: " << static_cast<float>(target) << std::endl;
+	std::cout << "double: " << static_cast<double>(target) << std::endl;
+}
 
-// 	targetStream.str(target);
-// 	targetStream >> _doubleType;
-
-// 	if (targetStream.fail() || targetStream.eof() == false)
-// 	{
-// 		return (false);
-// 	}
-
-// 	if (target[0] == '+' || target[0] == '-' || isalnum(target[0]) == true)
-// 	{
-// 		// {num}, +{num}, -{num}, +inf, +inff, -inf, -inff, nan, nanf
-// 	}
-// 	else
-// 	{
-// 		// {single character}
-// 		if (target.size() != 1)
-// 		{
-// 			return (false);
-// 		}
-// 		return (true);
-// 	}
-// }
 
 void ScalarConverter::convert(std::string target)
 {
 	if (target.size() == 0)
+		std::cerr << RED << "Error: Empty string error" << std::endl;
+	else if (target.size() == 1 && std::isdigit(target[0]) == false)
 	{
-		std::cerr << RED << "Error: String is empty" << RESET << std::endl;
-		return ;
+		charToOtherType(target[0]);
 	}
-	else if (target.size() == 1)
+	else
 	{
-		if (std::isprint(target[0]) == true)
-			_charType = target[0];
-		else
-			_charType = NON_PRINTABLE;
-		
+		stringToOtherType(target);
 	}
-	if (stringToOtherType(target) == false)
-	{
-		std::cerr << "Input: " << target << RED << " Error: Invalid string error" << RESET << std::endl;
-		return ;
-	}
-	
 }

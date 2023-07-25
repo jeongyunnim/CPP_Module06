@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cctype>
 #include <sstream>
 
 #define RESET       "\033[0m"     // 모든 색상과 스타일 초기화
@@ -34,18 +35,19 @@
 class ScalarConverter
 {
 public:
-	~ScalarConverter(void);
-	ScalarConverter& operator=(const ScalarConverter& rhs);
-	ScalarConverter(const ScalarConverter& other);
 
 	static void convert(std::string target);
 
 private:
 
-	ScalarConverter(void);
-
 	static double		_doubleType;
 	static std::string	convertedType;
-	void stringToOtherType(std::string& target);
-	void charToOtherType(std::string& target);
+
+	ScalarConverter(void);
+	~ScalarConverter(void);
+	ScalarConverter& operator=(const ScalarConverter& rhs);
+	ScalarConverter(const ScalarConverter& other);
+
+	static void stringToOtherType(std::string& target);
+	static void charToOtherType(char target);
 };
