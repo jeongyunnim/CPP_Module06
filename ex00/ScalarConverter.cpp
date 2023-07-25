@@ -6,7 +6,7 @@ static void convertToChar(double target)
 	if (32 <= target && target <= 126)
 		std::cout << static_cast<char>(target) << std::endl;
 	else
-		std::cout << RED << "Non displayable." << RESET << std::endl;
+		std::cout << RED << "Non displayable" << RESET << std::endl;
 }
 
 static void convertToInt(double target)
@@ -22,13 +22,44 @@ static void convertToInt(double target)
 
 static void convertToFloat(double target)
 {
-	std::cout << "float: " << static_cast<float>(target) << 'f' << std::endl;
 }
 
+static bool	stringValidCheck(std::string& target)
+{
+	for (std::string::iterator it = target.begin(); it != target.end(); it++)
+	{
+		if (std::isdigit(*it) == false && \
+			((*it == '+' || *it == '-') && it != target.begin()) && \
+			(*it == '.' && (it == target.begin() || it == (target.end() - 1))) && \
+			(*it == '.' && (std::isdigit(*(it - 1)) == false || (std::isdigit(*(it + 1)) == false))))
+			return (false);
+	}
+	return (true);
+}
 
 void ScalarConverter::stringToOtherType(std::string& target)
 {
-
+	try
+	{
+		_doubleType = std::stod(target);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
+	}
+	if (_doubleType != _doubleType || _doubleType == INFINITY || _doubleType == -INFINITY)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+	}
+	else
+	{
+		convertToChar(_doubleType);
+		convertToInt(_doubleType);
+	}
+	std::cout << "float: " << static_cast<float>(_doubleType) << 'f' << std::endl;
+	std::cout << "double: " << _doubleType << std::endl;
 }
 
 void ScalarConverter::charToOtherType(char target)
@@ -53,6 +84,11 @@ void ScalarConverter::convert(std::string target)
 	}
 	else
 	{
+		if (stringValidCheck(target) == false)
+		{	
+			std::cerr << RED << "Error: Invalid string error" << RESET << std::endl;
+			return ;
+		}
 		stringToOtherType(target);
 	}
 }
