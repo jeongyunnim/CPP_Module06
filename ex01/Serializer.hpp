@@ -4,9 +4,7 @@
 
 #include <iostream>
 #include <string>
-#include <cctype>
-#include <iomanip>
-#include <sstream>
+#include "Data.hpp"
 
 #define RESET       "\033[0m"     // 모든 색상과 스타일 초기화
 
@@ -41,8 +39,8 @@ class Serializer
 {
 public:
 
-	uintptr_t	serialize(Data* ptr);
-	Data*		deserialize(uintptr_t raw);
+	static uintptr_t	serialize(Data* ptr);
+	static Data*		deserialize(uintptr_t raw);
 
 private:
 
@@ -51,8 +49,6 @@ private:
 	Serializer& operator=(const Serializer& rhs);
 	Serializer(const Serializer& other);
 
-	static void stringToOtherType(std::string& target);
-	static void charToOtherType(char target);
 };
 
 #endif

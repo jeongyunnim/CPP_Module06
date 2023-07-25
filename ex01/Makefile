@@ -1,12 +1,12 @@
-NAME 		=	converter
+NAME 		=	ex01
 
 CXX 		=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-INCS		=	./ScalarConverter.hpp\
+INCS		=	./Serializer.hpp\
 				
 SRCS		=	./main.cpp\
-				./ScalarConverter.cpp\
+				./Serializer.cpp\
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 
