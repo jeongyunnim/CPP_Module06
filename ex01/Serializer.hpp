@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SCALARCONVERTER_H_
-#define _SCALARCONVERTER_H_
+#ifndef SERIALIZATION_H
+#define SERIALIZATION_H
 
 #include <iostream>
 #include <string>
@@ -37,21 +37,19 @@
 #define BACKGROUND_CYAN        "\033[46m"   // 배경색: 청록색
 #define BACKGROUND_WHITE       "\033[47m"   // 배경색: 흰색
 
-class ScalarConverter
+class Serializer
 {
 public:
 
-	static void convert(std::string target);
+	uintptr_t	serialize(Data* ptr);
+	Data*		deserialize(uintptr_t raw);
 
 private:
 
-	static double		_doubleType;
-	static std::string	convertedType;
-
-	ScalarConverter(void);
-	~ScalarConverter(void);
-	ScalarConverter& operator=(const ScalarConverter& rhs);
-	ScalarConverter(const ScalarConverter& other);
+	Serializer(void);
+	~Serializer(void);
+	Serializer& operator=(const Serializer& rhs);
+	Serializer(const Serializer& other);
 
 	static void stringToOtherType(std::string& target);
 	static void charToOtherType(char target);
