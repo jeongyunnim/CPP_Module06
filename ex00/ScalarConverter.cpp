@@ -1,5 +1,14 @@
 #include "ScalarConverter.hpp"
 
+static void convertToChar(double target)
+{
+	std::cout << "char: ";
+	if (32 <= target && target <= 126)
+		std::cout << static_cast<char>(target) << std::endl;
+	else
+		std::cout << RED << "Non displayable." << RESET << std::endl;
+}
+
 static void convertToInt(double target)
 {
 	std::cout << "int: ";
@@ -10,6 +19,12 @@ static void convertToInt(double target)
 	else
 		std::cout << static_cast<int>(target) << std::endl;
 }
+
+static void convertToFloat(double target)
+{
+	std::cout << "float: " << static_cast<float>(target) << 'f' << std::endl;
+}
+
 
 void ScalarConverter::stringToOtherType(std::string& target)
 {
