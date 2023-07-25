@@ -1,11 +1,14 @@
 #include "ScalarConverter.hpp"
 
-static std::string convertToInt(double target)
+static void convertToInt(double target)
 {
-	std::string result;
-
-	if (target > INT32_MAX || target > INT32_MAX)
-	return (result);
+	std::cout << "int: ";
+	if (target > INT32_MAX)
+		std::cout << RED << "over the int max value." << RESET << std::endl;
+	else if (target < INT32_MIN)
+		std::cout << RED << "over the int min value." << RESET << std::endl;
+	else
+		std::cout << static_cast<int>(target) << std::endl;
 }
 
 void ScalarConverter::stringToOtherType(std::string& target)
