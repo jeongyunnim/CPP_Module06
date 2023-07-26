@@ -7,12 +7,10 @@ INCS		=	./Base.hpp\
 				./A.hpp\
 				./B.hpp\
 				./C.hpp\
+				./utilities.hpp\
 
 SRCS		=	./main.cpp\
-				./Base.cpp\
-				./A.cpp\
-				./B.cpp\
-				./C.cpp\
+				./utilities.cpp\
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 

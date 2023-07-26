@@ -1,26 +1,43 @@
-#include "Serializer.hpp"
-#include "Data.hpp"
+#include "utilities.hpp"
+
+void leak()
+{
+	system("leaks $PPID");
+}
+void testReferenceType(Base *target[], int i)
+{
+	Base& temp = *target[i];
+	std::cout << i + 1 << ": ";
+	identify(temp);
+}
 
 int main(void)
 {
-	Data *test = new Data;
-	Data *dataPtr;
-	uintptr_t	dataSerial;
+	int	time = 20;
+	Base *generatedClasses[time];
 
-	std::cout << BOLDWHITE << "-----------------------<<serialize and deserialize test>>-----------------------\n" << RESET << std::endl;
-	test->content = "Hello evaluator";
-	std::cout << "Original data's content: "<< test->content << '\n' << std::endl; 
+	atexit(leak);
+	bzero(generatedClasses, sizeof(generatedClasses));
+	std::cout << BOLDWHITE << "-----------------------<<Generate random class>>-----------------------\n" << RESET << std::endl;
+	for (int i = 0; i < time; i++)
+	{
+		generatedClasses[i] = generate();
+	}
+	std::cout << BOLDWHITE << "\n\n-----------------------<<identify random class>>-----------------------\n" << RESET << std::endl;
+	for (int i = 0; i < time; i++)
+	{
+		std::cout << '\n' << i + 1 << ": ";
+		identify(generatedClasses[i]);
+		testReferenceType(generatedClasses, i);
+	}
 
-	std::cout << "data pointer: " << CYAN << test << RESET << std::endl;
-	dataSerial = Serializer::serialize(test);
-	std::cout << "data pointer's serial number: " << dataSerial << std::endl;
-	dataPtr = Serializer::deserialize(dataSerial);
-	std::cout << "returned data pointer: " << CYAN << test << RESET << std::endl;
-	std::cout << BOLDWHITE << "\n-----------------------<<Deserialized pointer's value>>-----------------------\n" << RESET << std::endl;
-	std::cout << "Data pointer's content: " << dataPtr->content << std::endl;
+	for (int i = 0; i < time; i++)
+	{
+		if (generatedClasses[i] != NULL)
+			delete generatedClasses[i];
 
-	std::cout << BOLDWHITE << "\n-----------------------<<Delete whth desireailized pointer>>-----------------------\n" << RESET << std::endl;
-	delete dataPtr;
-	std::cout << "THANK YOU!" << std::endl;
+	}
+
 	return (0);
+	std::cout << "1: ";
 }
