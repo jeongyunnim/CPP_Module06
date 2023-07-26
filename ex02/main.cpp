@@ -34,8 +34,11 @@ int main(void)
 	for (int i = 0; i < time; i++)
 	{
 		if (generatedClasses[i] != NULL)
+		{
 			delete generatedClasses[i];
-
+			generatedClasses[i] = NULL;
+		}
+		identify(generatedClasses[i]);
 	}
 
 	return (0);

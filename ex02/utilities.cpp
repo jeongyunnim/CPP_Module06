@@ -3,12 +3,8 @@
 Base *generate(void)
 {
 	struct timeval *timeTemp = new struct timeval();
-	gettimeofday(timeTemp, NULL);
-	gettimeofday(timeTemp, NULL);
-	gettimeofday(timeTemp, NULL);
-	gettimeofday(timeTemp, NULL);
-	gettimeofday(timeTemp, NULL);
-	gettimeofday(timeTemp, NULL);
+	for (int i = 0; i < 30; i++)
+		gettimeofday(timeTemp, NULL);
 	std::srand(timeTemp->tv_usec);
 	delete timeTemp;
 	
