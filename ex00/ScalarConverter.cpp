@@ -73,7 +73,7 @@ void ScalarConverter::stringToOtherType(std::string& target)
 {
 	try
 	{
-		_doubleType = std::stod(target);
+		_doubleType = std::strtod(target.c_str(), NULL);
 	}
 	catch(const std::exception& e)
 	{
