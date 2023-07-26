@@ -48,6 +48,8 @@ static bool	stringValidCheck(std::string target)
 			return (true);
 		}
 	}
+	if (target[target.size() - 1] == 'f' || target[target.size() - 1] == 'F')
+		target.erase(target.size() - 1, 1);
 	for (std::string::iterator it = target.begin(); it != target.end(); it++)
 	{
 		if (std::isdigit(*it) == false)
@@ -109,14 +111,12 @@ void ScalarConverter::convert(std::string target)
 	if (target.size() == 0)
 		std::cerr << RED << "Error: Empty string error" << std::endl;
 	else if (target.size() == 1 && std::isdigit(target[0]) == false)
-	{
 		charToOtherType(target[0]);
-	}
 	else
 	{
 		if (stringValidCheck(target) == false)
 		{	
-			std::cerr << RED << "Error: Invalid string error" << RESET << std::endl;
+			std::cerr << RED << "Error: Invalid string error" << RESET << " [input: " << target << ']' << std::endl;
 			return ;
 		}
 		stringToOtherType(target);
