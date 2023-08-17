@@ -9,7 +9,6 @@ static void lowercaseString(std::string& formName)
 		if ('A' <= *it && *it <= 'Z')
 			*it += 32;
 	}
-
 }
 
 static void convertToChar(double target)
@@ -24,9 +23,9 @@ static void convertToChar(double target)
 static void convertToInt(double target)
 {
 	std::cout << "int: ";
-	if (target > INT32_MAX)
+	if (target > std::numeric_limits<int>::max())
 		std::cout << RED << "over the int max value." << RESET << std::endl;
-	else if (target < INT32_MIN)
+	else if (target < std::numeric_limits<int>::min())
 		std::cout << RED << "over the int min value." << RESET << std::endl;
 	else
 		std::cout << static_cast<int>(target) << std::endl;
@@ -80,7 +79,7 @@ void ScalarConverter::stringToOtherType(std::string& target)
 		std::cerr << RED << e.what() << RESET << '\n';
 		return ;
 	}
-	if (_doubleType != _doubleType || _doubleType == INFINITY || _doubleType == -INFINITY)
+	if (_doubleType != _doubleType || _doubleType > std::numeric_limits<double>::max() || _doubleType < std::numeric_limits<double>::min())
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;

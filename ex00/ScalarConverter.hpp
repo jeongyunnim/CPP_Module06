@@ -3,6 +3,8 @@
 #define _SCALARCONVERTER_H_
 
 #include <iostream>
+#include <limits>
+#include <cstdlib>
 #include <string>
 #include <cctype>
 #include <iomanip>
