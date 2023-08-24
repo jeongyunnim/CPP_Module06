@@ -79,7 +79,7 @@ void ScalarConverter::stringToOtherType(std::string& target)
 		std::cerr << RED << e.what() << RESET << '\n';
 		return ;
 	}
-	if (_doubleType != _doubleType || _doubleType > std::numeric_limits<double>::max() || _doubleType < std::numeric_limits<double>::min())
+	if (_doubleType != _doubleType || _doubleType > std::numeric_limits<int>::max() || _doubleType < std::numeric_limits<int>::min())
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
